@@ -1,0 +1,214 @@
+.calendar {
+    position: relative;
+    width: 850px;
+    margin: 40px auto;
+    padding: 53px 105px 53px 105px;
+    border-radius: 10px;
+    background-color: $bgColor;
+}
+
+.calndar__close {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+
+    &:hover{
+        opacity: 0.5;
+    }
+
+    &::before{
+        position: absolute;
+        top: 50%;
+        content: "";
+        width: 20px;
+        height: 3px;
+        background: #313131;
+        transform: rotate(-45deg);
+    }
+    &::after{
+        position: absolute;
+        top: 50%;
+        content: "";
+        width: 20px;
+        height: 3px;
+        background: #313131;
+        transform: rotate(45deg);
+    }
+
+
+}
+
+.calendar__title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.calendar__desc {
+    margin-bottom: 30px;
+    width: 700px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #ffffffcc;
+}
+
+
+.calendar__content {
+    
+}
+.calendar__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+.calendar__selection-dates {
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+}
+.calendar__selection-dates-text{
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+}
+
+.calendar__toggle-date {
+    display: inline-block;
+    overflow: hidden;
+}
+
+.calendar__days {
+
+}
+.calendar__day-of-week {
+    display: flex;
+    text-align: center;
+    column-gap: 8px;
+    margin-bottom: 15px;
+}
+.day-of-week-item {
+    width: calc(100% / 7);
+    font-size: 17px;
+    font-weight: 700;
+    // position: relative;
+    // z-index: 2;
+}
+
+.calendar__dates {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 8px;
+    flex-direction: column;
+}
+.calendar__weeks {
+    display: flex;
+    column-gap: 8px;
+}
+.calendar__day {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85px;
+    width: calc(100% / 7);
+    font-size: 14px;
+    font-weight: 700;
+    border: 1px solid white;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+
+    span{
+        z-index: 2;
+    }
+}
+
+.calendar__day_prevDate{
+    border: none;
+    background-color: rgb(129 129 129 / 47%);
+    color: rgb(129 129 129 / 80%);
+    cursor: not-allowed;
+}
+
+.calendar__day_not-current{
+    opacity: 0.3;
+}
+
+.calendar__progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    background-color: #82c198; /* Цвет прогресса */
+    border-radius: 15px;
+    width: 100%;
+    z-index: 1;
+}
+
+.calendar__info{
+    margin-bottom: 20px;
+    text-align: center;
+    span{
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 150%;
+        color: #c8c8c8;;
+    }
+}
+
+.calendar__time-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.calendar__time-options-item {
+    flex: 0 0 calc(100% - 50px);
+    margin-left: 50px;
+    display: flex;
+    border: 1px solid #313131;
+    border-radius: 10px;
+    height: 50px;
+    position: relative;
+    align-items: center;
+    cursor: pointer;
+    &::before{
+        content: attr(hour);
+        position: absolute;
+        font-weight: 400;
+        font-size: 16px;
+        color: #c8c8c8;
+    }
+    &:first-of-type::before{
+        left: -90px;
+    }
+    &:last-of-type::before{
+        left: -100px;
+    }
+}
+.schedules {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    div{
+        background-color: #444745;
+        border: 1px solid hsla(0, 0%, 100%, .271);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .own{
+        background-color: #82c198;
+    }
+}
+.schedules_filled{
+    background: repeating-linear-gradient(-55deg, rgba(34, 34, 34, .4), rgba(34, 34, 34, .4) 10px, rgba(51, 51, 51, .4) 0, rgba(51, 51, 51, .4) 20px);;
+}
+

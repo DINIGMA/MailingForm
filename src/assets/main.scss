@@ -1,0 +1,22 @@
+//base
+
+@import './base/vars.scss';
+@import './base/base.scss';
+
+//pages
+@import './pages/mailing.scss';
+
+//section
+@import './section/mailing-form.scss';
+@import './section/calendar.scss';
+@import './section/main-section.scss';
+@import './section/popup.scss';
+
+//blocks
+@import './blocks/input-form.scss';
+@import './blocks/block-description.scss';
+@import './blocks/mailing-title.scss';
+@import './blocks/channels.scss';
+@import './blocks/buttons.scss';
+@import './blocks/date-editor.scss';
+@import './blocks/multiselect.scss';
