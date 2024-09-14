@@ -90,19 +90,21 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-  <h3>Выберите имя отправителя</h3>
-  <div v-for="operator in operatorData" :key="operator.key" class="mailing-form__operators">
-    <h4>{{ operator.name }}</h4>
-    <div class="select-wrapper">
-      <Multiselect
-        v-model="selectedSenders[operator.key]"
-        :options="getSendersForOperator(operator.key)"
-        placeholder="Выберите способ отправки"
-      />
+  <div class="mailing-form__block-sub">
+    <h3>Выберите имя отправителя</h3>
+    <div v-for="operator in operatorData" :key="operator.key" class="mailing-form__operators">
+      <h4>{{ operator.name }}</h4>
+      <div class="select-wrapper">
+        <Multiselect
+          v-model="selectedSenders[operator.key]"
+          :options="getSendersForOperator(operator.key)"
+          placeholder="Выберите способ отправки"
+        />
+      </div>
+      <span v-if="selectedSenders[operator.key] !== 'not_send'">
+        {{ getPrice(operator.key) }} руб./сообщение</span
+      >
     </div>
-    <span v-if="selectedSenders[operator.key] !== 'not_send'">
-      {{ getPrice(operator.key) }} руб./сообщение</span
-    >
   </div>
 </template>
 

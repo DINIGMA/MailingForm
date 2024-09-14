@@ -5,6 +5,7 @@ import { useMailingStore } from '@/stores/Mailing'
 import { useBasesStore } from '@/stores/Bases'
 import { storeToRefs } from 'pinia'
 import Multiselect from '../MailingComponents/Multiselect.vue'
+import ButtonAppend from '@/components/UI-components/ButtonAppend.vue'
 import MultiselectWA from '@/components/MailingComponents/MultiselectWA.vue'
 
 const mailingStore = useMailingStore()
@@ -55,57 +56,74 @@ watch(selectedBases, () => {
 
 <template>
   <form class="mailing-form step 1" @submit.prevent>
-    <div class="mailing-form__block">
-      <h3>Базы для отправки и черные списки</h3>
-      <div class="mailing-form__block-sub">
-        <ul class="mailing-form__bases">
-          <li>
-            <div class="select-wrapper">
-              <MultiselectWA
-                v-model="selectedBases"
-                :options="getWhatsAppBasesOptions"
-                placeholder="Выберите базу для отправки"
-              />
-            </div>
-          </li>
-          <li></li>
-        </ul>
+    <div class="wa-form">
+      <div class="mailing-form__block">
+        <h3>Базы для отправки и черные списки</h3>
+        <div class="mailing-form__block-sub">
+          <ul class="mailing-form__bases">
+            <li>
+              <div class="select-wrapper">
+                <MultiselectWA
+                  v-model="selectedBases"
+                  :options="getWhatsAppBasesOptions"
+                  :emptyText="'Нет баз'"
+                  placeholder="Выберите базу для отправки"
+                />
+              </div>
+              <div class="button-wrapper button-wrapper--text">
+                <ButtonAppend :text="'Загрузить новую базу'"></ButtonAppend>
+              </div>
+            </li>
+            <li>
+              <div class="select-wrapper">
+                <MultiselectWA
+                  :options="[]"
+                  :emptyText="'Нет баз,проверенных на наличие мессенджера'"
+                  placeholder="Выберите базу для отправки"
+                />
+              </div>
+              <div class="button-wrapper button-wrapper--text">
+                <ButtonAppend :text="'Загрузить черный список'"></ButtonAppend>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-    <div class="mailing-form__block">
-      <h3>Текст сообщения</h3>
+      <div class="mailing-form__block">
+        <h3>Текст сообщения</h3>
+        <div class="mailing-form__block-sub"></div>
+      </div>
       <div class="mailing-form__block-sub"></div>
-    </div>
-    <div class="mailing-form__block-sub"></div>
-    <div class="additional-steps"></div>
-    <div class="mailing-form__block-sub mailing-form__test"></div>
-    <div class="mailing-form__block send-date">
-      <h3>Дата и время отправки</h3>
-      <div class="date-editor">
-        <input
-          :value="date"
-          type="text"
-          autocomplete="off"
-          placeholder="Выберите дату"
-          class="input-date"
-          readonly
-          @click="openModal"
-        />
-        <span>
-          <img src="/public/img/1.png" alt="" width="20" height="20" />
-        </span>
+      <div class="additional-steps"></div>
+      <div class="mailing-form__block-sub mailing-form__test"></div>
+      <div class="mailing-form__block send-date">
+        <h3>Дата и время отправки</h3>
+        <div class="date-editor">
+          <input
+            :value="date"
+            type="text"
+            autocomplete="off"
+            placeholder="Выберите дату"
+            class="input-date"
+            readonly
+            @click="openModal"
+          />
+          <span>
+            <img src="/public/img/1.png" alt="" width="20" height="20" />
+          </span>
+        </div>
+        <div class="popup" v-if="isModalOpen">
+          <div class="popup-blur" @click="closeModal"></div>
+          <Calendar @update-date="updateDate" @close-popup="closeModal"></Calendar>
+        </div>
       </div>
-      <div class="popup" v-if="isModalOpen">
-        <div class="popup-blur" @click="closeModal"></div>
-        <Calendar @update-date="updateDate" @close-popup="closeModal"></Calendar>
-      </div>
+      <div class="mailing-form__test mailing-form__block-sub"></div>
+      <button class="mailing-btn" @click="emits('prev')">
+        <div class="mailing-btn__arrow"></div>
+        <span>Продолжить</span>
+      </button>
+      <div>{{ getWhatsAppBasesOptions }}</div>
     </div>
-    <div class="mailing-form__test mailing-form__block-sub"></div>
-    <button class="mailing-btn" @click="emits('prev')">
-      <div class="mailing-btn__arrow"></div>
-      <span>Продолжить</span>
-    </button>
-    <div>{{ getWhatsAppBasesOptions }}</div>
   </form>
 </template>
 

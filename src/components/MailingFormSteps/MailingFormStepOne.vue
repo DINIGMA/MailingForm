@@ -147,14 +147,6 @@ const nextStep = async () => {
         </div>
       </div>
     </div> -->
-    <button
-      class="mailing-btn"
-      @click="nextStep()"
-      :class="[{ 'mailing-btn_disabled': v$.$silentErrors.length > 0 }]"
-    >
-      <div class="mailing-btn__arrow"></div>
-      <span>Продолжить</span>
-    </button>
   </form>
 </template>
 

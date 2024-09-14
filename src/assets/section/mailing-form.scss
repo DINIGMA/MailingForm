@@ -59,6 +59,25 @@
 .mailing-form__block-sub {
   margin-bottom: 20px;
 }
+
+.mailing-form__bases {
+  li {
+    margin-bottom: 0;
+    .button-wrapper {
+      margin-left: 25px;
+    }
+    .select-wrapper {
+      width: 265px;
+    }
+    &:not(.multiselect__element) {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+  }
+}
+
 .channels__wrapper {
 }
 .channels__item {
@@ -86,4 +105,11 @@
   // span {
   //   width: 30%;
   // }
+}
+
+.wa-form {
+  width: 100%;
+}
+.sms-form {
+  width: 100%;
 }

@@ -5,7 +5,7 @@ import { storeToRefs } from 'pinia'
 
 const mailingStore = useMailingStore()
 
-const { formData, getTypes } = storeToRefs(mailingStore)
+const { whatsAppFormData, getTypes } = storeToRefs(mailingStore)
 </script>
 
 <template>
@@ -16,7 +16,7 @@ const { formData, getTypes } = storeToRefs(mailingStore)
         v-for="(item, index) in getTypes"
         :key="index"
         :class="{
-          active: item.key == formData.activeTypes,
+          active: item.key == whatsAppFormData.activeTypes,
           disabled: item.active !== true
         }"
       >
@@ -35,7 +35,7 @@ const { formData, getTypes } = storeToRefs(mailingStore)
             name="tariffs"
             :id="item.key"
             :value="item.key"
-            v-model="formData.activeTypes"
+            v-model="whatsAppFormData.activeTypes"
           />
           <label :for="item.key"></label>
         </div>

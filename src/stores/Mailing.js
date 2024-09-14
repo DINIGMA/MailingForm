@@ -11,9 +11,14 @@ export const useMailingStore = defineStore('MailingStore', () => {
 
   const formData = reactive({
     mailingName: '',
-    mailingChannel: 'whatsApp',
+    mailingChannel: 'whatsApp'
+  })
+
+  const whatsAppFormData = reactive({
     activeTypes: 'text'
   })
+
+  const smsFormData = reactive({})
 
   const getTypeMailing = async () => {
     try {
@@ -45,6 +50,8 @@ export const useMailingStore = defineStore('MailingStore', () => {
   return {
     channels,
     formData,
+    whatsAppFormData,
+    smsFormData,
     getTypeMailing,
     getTypes,
     updateBases

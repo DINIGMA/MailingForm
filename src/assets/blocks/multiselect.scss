@@ -41,6 +41,51 @@
   font-size: 14px;
 }
 
+.multiselect__tags-wrapper {
+  display: inline;
+}
+.multiselect__tag {
+  position: relative;
+  display: inline-block;
+  padding: 4px 26px 4px 10px;
+  border-radius: 5px;
+  margin-right: 10px;
+  color: #fff;
+  line-height: 1;
+  background: #41b883;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+  text-overflow: ellipsis;
+}
+.multiselect__tag-icon {
+  cursor: pointer;
+  margin-left: 7px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  font-weight: 700;
+  font-style: normal;
+  width: 22px;
+  text-align: center;
+  line-height: 22px;
+  transition: all 0.2s ease;
+  border-radius: 5px;
+  &::after {
+    content: '\D7';
+    color: #266d4d;
+    font-size: 18px;
+  }
+  &:hover {
+    background-color: #0000001e;
+    &::after {
+      color: #fff;
+    }
+  }
+}
+
 .multiselect__input {
   position: relative;
   display: inline-block;
@@ -84,6 +129,9 @@
   margin: 0;
   min-width: 100%;
   vertical-align: top;
+  li {
+    margin-bottom: 0;
+  }
 }
 .multiselect__element {
   display: block;
