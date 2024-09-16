@@ -1,12 +1,10 @@
 <script setup>
-import { computed, onMounted, reactive, ref } from 'vue'
+import { computed, onMounted, provide, reactive, ref } from 'vue'
 import { useMailingStore } from '@/stores/Mailing'
 import { useBasesStore } from '@/stores/Bases'
 import { storeToRefs } from 'pinia'
 import { Form, Field, ErrorMessage, useForm, validate } from 'vee-validate'
 import * as yup from 'yup'
-import MailingFormStepOne from '@/components/MailingFormSteps/MailingFormStepOne.vue'
-import MailingFormStepSecond from '@/components/MailingFormSteps/MailingFormStepSecond.vue'
 import ChoosingChannel from '@/components/MailingComponents/ChoosingChannel.vue'
 import WhatsAppForm from '@/components/MailingFormSteps/WhatsAppForm.vue'
 import SmsForm from '@/components/MailingFormSteps/SmsForm.vue'
@@ -40,16 +38,21 @@ const prevStep = () => {
   }
 }
 
+provide('prev', prevStep)
+
 const schemaStepOne = yup.object({
   mailingName: yup.string().required('Введите название')
 })
 
 const schemaStepTwo = yup.object({
-  myInputData: yup.string().required('Введите название')
+  messageText: yup
+    .string()
+    .required('Введите текст сообщения')
+    .max(900, 'Максимальная длина 900 символов')
 })
 
 const getSchema = computed(() => {
-  if (currentStep.value == 1 && formData.value.mailingChannel == 'whatsApp') {
+  if (currentStep.value == 1) {
     console.log(1111)
     return schemaStepOne
   }
@@ -102,7 +105,7 @@ onMounted(async () => {
               ></WhatsAppForm>
               <SmsForm v-if="formData.mailingChannel == 'sms'"></SmsForm>
               <button
-                class="mailing-btn"
+                class="mailing-btn__next"
                 type="button"
                 @click="nextStep(validate)"
                 :class="[{ 'mailing-btn_disabled': !meta.valid }]"

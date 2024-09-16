@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, toRefs, computed, provide, watch } from 'vue'
+import { onMounted, ref, toRefs, computed, provide, watch, inject } from 'vue'
 import Calendar from '../Calendar/Calendar.vue'
 import { useMailingStore } from '@/stores/Mailing'
 import { useBasesStore } from '@/stores/Bases'
@@ -8,7 +8,7 @@ import { Field, ErrorMessage, useField, useForm } from 'vee-validate'
 import Multiselect from '../MailingComponents/Multiselect.vue'
 import ButtonAppend from '@/components/UI-components/ButtonAppend.vue'
 import MultiselectWA from '@/components/MailingComponents/MultiselectWA.vue'
-import MyInput from './MyInput.vue'
+import Textarea from '../UI-components/Textarea.vue'
 
 const mailingStore = useMailingStore()
 const basesStore = useBasesStore()
@@ -16,14 +16,17 @@ const basesStore = useBasesStore()
 const { formData, getTypes } = storeToRefs(mailingStore)
 const { bases } = storeToRefs(basesStore)
 
-const data = ref('')
-
-const emits = defineEmits(['next', 'prev'])
-
 const selectedBases = ref([])
 
+// const data = ref('')
+
 const date = ref(null)
+
 const isModalOpen = ref(false)
+
+const textareaData = ref('')
+
+const prev = inject('prev')
 
 const closeModal = () => {
   isModalOpen.value = false
@@ -93,7 +96,23 @@ watch(selectedBases, () => {
   </div>
   <div class="mailing-form__block">
     <h3>Текст сообщения</h3>
-    <div class="mailing-form__block-sub"></div>
+    <div class="mailing-form__block-sub">
+      <p class="mailing-form__message-length">
+        <span>Максимальное количество символов: {{ 900 }}</span
+        ><br /><span>Символов: {{ textareaData.length }}</span>
+      </p>
+      <div class="textarea-wrapper">
+        <Field
+          name="messageText"
+          :validateOnMount="false"
+          :validateOnInput="true"
+          v-slot="{ field, errors }"
+          ><Textarea v-bind="field" :errors="errors" v-model="formData.message"></Textarea>
+          <div class="form__error">
+            <ErrorMessage name="messageText"></ErrorMessage></div
+        ></Field>
+      </div>
+    </div>
   </div>
   <div class="mailing-form__block-sub"></div>
   <div class="additional-steps"></div>
@@ -120,13 +139,18 @@ watch(selectedBases, () => {
     </div>
   </div>
   <div class="mailing-form__test mailing-form__block-sub"></div>
-  <button class="mailing-btn" @click="emits('prev')">
-    <div class="mailing-btn__arrow"></div>
-    <span>Продолжить</span>
-  </button>
-  <div>{{ getWhatsAppBasesOptions }}</div>
+  <div class="mailing-form__buttons">
+    <button type="button" class="mailing-btn__prev" @click="prev">
+      <div class="mailing-btn__prev-arrow"></div>
+      <span>Назад</span>
+    </button>
+    <button type="button" class="mailing-btn__next">
+      <div class="mailing-btn__arrow"></div>
+      <span>Продолжить</span>
+    </button>
+  </div>
 
-  <Field
+  <!-- <Field
     name="myInputData"
     v-model="data"
     :validateOnMount="false"
@@ -135,7 +159,7 @@ watch(selectedBases, () => {
   >
     <MyInput name="myInputData" v-bind="field"></MyInput>
     <ErrorMessage name="myInputData"></ErrorMessage>
-  </Field>
+  </Field> -->
 </template>
 
 <style></style>

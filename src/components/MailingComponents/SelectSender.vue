@@ -4,11 +4,12 @@ import { onBeforeMount, ref, computed, watch } from 'vue'
 import { usePricesStore } from '@/stores/Prices'
 import { useMailingStore } from '@/stores/Mailing'
 import { storeToRefs } from 'pinia'
+import SmsForm from '../MailingFormSteps/SmsForm.vue'
 
 const pricesStore = usePricesStore()
 const mailingStore = useMailingStore()
 
-const { formData } = storeToRefs(mailingStore)
+const { formData, smsFormData } = storeToRefs(mailingStore)
 const { operators, products } = storeToRefs(pricesStore)
 
 const selectedSenders = ref({})
@@ -79,7 +80,7 @@ const submission = computed(() => {
 watch(
   selectedSenders,
   () => {
-    formData.value.operators_settings = submission.value
+    smsFormData.value.operators_settings = submission.value
   },
   { deep: true }
 )

@@ -2,6 +2,7 @@
 import { computed, onMounted, ref, toRefs, watch } from 'vue'
 import { useMailingStore } from '@/stores/Mailing'
 import WhatsAppChoose from '@/components/MailingComponents/WhatsAppChoose.vue'
+import Input from '../UI-components/Input.vue'
 import SelectSender from '@/components/MailingComponents/SelectSender.vue'
 import { Field, ErrorMessage, useField, useForm } from 'vee-validate'
 import { storeToRefs } from 'pinia'
@@ -38,9 +39,9 @@ const handleFocusEvent = () => {
       <div class="mailing-form__infoPanel">
         Задания на рассылку, а также правки по ним принимаются за день до старта
       </div>
-      <Field
+      <!-- <Field
+        v-model="formData.mailingName"
         name="mailingName"
-        :validateOnMount="false"
         :validateOnInput="true"
         v-slot="{ field, errors }"
         ><div
@@ -58,11 +59,22 @@ const handleFocusEvent = () => {
             @blur="handleBlurEvent()"
             autocomplete="off"
             v-bind="field"
-            v-model="formData.mailingName"
+            :value="formData.mailingName"
             :placeholder="isFocused & !formData.mailingName ? 'Введите название' : ''"
           />
           <span>Название рассылки</span>
         </div>
+
+        <div class="form__error">
+          <ErrorMessage name="mailingName"></ErrorMessage>
+        </div>
+      </Field> -->
+      <Field
+        v-model="formData.mailingName"
+        name="mailingName"
+        :validateOnInput="true"
+        v-slot="{ field, errors }"
+        ><Input v-bind="field" :errors="errors" v-model="formData.mailingName" />
         <div class="form__error">
           <ErrorMessage name="mailingName"></ErrorMessage>
         </div>

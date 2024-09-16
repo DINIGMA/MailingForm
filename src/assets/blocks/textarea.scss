@@ -1,0 +1,27 @@
+.input-form {
+  textarea {
+    scrollbar-width: thin;
+    transition: scrollbar-color 0.2s;
+    scrollbar-color: #ccc transparent;
+    -webkit-appearance: none;
+    border: 0;
+    padding: 25px 15px;
+    margin: 0;
+    background: transparent;
+    width: 100%;
+    outline: none;
+    resize: vertical;
+    color: inherit;
+    font: inherit;
+    max-height: 800px;
+  }
+}
+.input-textarea {
+  span {
+    height: auto;
+    top: 14px;
+    &:hover {
+      color: red;
+    }
+  }
+}

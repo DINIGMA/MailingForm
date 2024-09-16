@@ -1,6 +1,4 @@
-<script setup>
-import { provide, ref } from 'vue'
-</script>
+<script setup></script>
 
 <template>
   <router-view></router-view>

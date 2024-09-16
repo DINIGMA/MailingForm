@@ -9,7 +9,7 @@ const counter = mailingStore.formData.counter
 
 const procentOwnScheduler = computed(() => {
   if (counter !== null) {
-    return ((counter.value / defaultHourCapacity.value) * 100).toFixed(5)
+    return ((counter / defaultHourCapacity.value) * 100).toFixed(5)
   }
 })
 </script>
